@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct Quizz_App_V3App: App {
+    
+    let model = QuizModel.shared
+    let imageStore = ImageStore()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(model: model)
+                .environmentObject(imageStore)
         }
     }
 }
