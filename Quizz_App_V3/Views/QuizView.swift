@@ -30,9 +30,23 @@ struct QuizView: View {
                         .font(.largeTitle)
                         .foregroundColor(.white)
                     // Author view
-                    AuthorView(quiz: self.quiz)
-                        .foregroundColor(.white)
-                }).shadow(radius: 5)
+                    HStack{
+                        AuthorView(quiz: self.quiz)
+                            .foregroundColor(.white)
+                            .padding(40)
+                        // Favourite star button
+                        Button(action: {
+                            // add to favourites code
+                        }) {
+                            Image(systemName: "star")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.white)
+                                .padding(40)
+                        }
+                    }
+                })
+                .shadow(radius: 5)
             // Text field
             TextField("Type your answer", text: $answer)
                 .textFieldStyle(RoundedBorderTextFieldStyle()).padding(.all)
@@ -47,7 +61,8 @@ struct QuizView: View {
                     self.isCorrect = true
                     
                 }) {
-                    RoundedRectangle(cornerRadius: 20).frame(height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    RoundedRectangle(cornerRadius: 20)
+                        .frame(height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .foregroundColor(.green)
                         .padding()
                         .overlay(Text("Check!").font(.title2).foregroundColor(.white).bold())
