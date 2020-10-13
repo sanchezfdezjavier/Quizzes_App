@@ -12,7 +12,17 @@ class ScoreModel: ObservableObject {
     //@Published var score: Int
     @Published var checkedIds: Set<Int> = []
     
-    func checkAnser(){
+    func checkAnswer(answer: String, quiz: QuizItem) -> Bool {
+        let answ1 = answer.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        let answ2 = quiz.answer.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         
+        if (answ1 == answ2) && (!checkedIds.contains(quiz.id)) {
+            checkedIds.insert(quiz.id)
+            return true
+        } else if (answ1 == answ2) && (checkedIds.contains(quiz.id)){
+            return true
+        }
+        return false
     }
 }
+

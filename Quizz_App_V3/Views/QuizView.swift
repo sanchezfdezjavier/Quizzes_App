@@ -55,7 +55,7 @@ struct QuizView: View {
             HStack {
                 // Check button
                 Button(action: {
-                    if(self.answer.lowercased() == self.quiz.answer){
+                    if(scoreModel.checkAnswer(answer: self.answer, quiz: self.quiz)){
                         self.alertText = "Correct!"
                     }else{
                         self.alertText = "Incorrect, try again"
