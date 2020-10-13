@@ -63,7 +63,6 @@ struct QuizView: View {
                         }
                     }
                 })
-            Text(String(favouritesModel.favouriteIds.contains(quiz.id)))
             // Text field
             TextField("Type your answer", text: $answer)
                 .foregroundColor(.gray)

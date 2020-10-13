@@ -10,6 +10,7 @@ import Foundation
 class FavouritesModel: ObservableObject {
     
     @Published var favouriteIds: Set<Int> = []
+    @Published var showFavourites: Bool = false
     
     func addToFavourites(id: Int){
         if (!favouriteIds.contains(id)){
@@ -21,5 +22,9 @@ class FavouritesModel: ObservableObject {
         if(favouriteIds.contains(id)){
             favouriteIds.remove(id)
         }
+    }
+    
+    func toggleFavourites(){
+        showFavourites = !showFavourites
     }
 }

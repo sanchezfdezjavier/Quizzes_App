@@ -21,7 +21,7 @@ struct AuthorView: View {
                 .frame(width: 40, height: 40)
                 .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                 .overlay(Circle().stroke(Color.white, lineWidth: 2))
-                .shadow(radius: 1.5)
+                .shadow(radius: 1)
             Text(quiz.author?.username ?? "Uknown author")
         }
     }

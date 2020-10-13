@@ -17,7 +17,7 @@ struct Quizz_App_V3App: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(model: model)
+            ContentView(model: model, toggleShow: false)
                 .environmentObject(imageStore)
                 .environmentObject(scoreModel)
                 .environmentObject(favouritesModel)
