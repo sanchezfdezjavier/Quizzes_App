@@ -11,6 +11,7 @@ struct QuizView: View {
     
     var quiz: QuizItem
     @EnvironmentObject var imageStore: ImageStore
+    @EnvironmentObject var scoreModel: ScoreModel
     
     @State private var showCorrectAnswer = false
     @State private var answer: String = ""
@@ -23,6 +24,7 @@ struct QuizView: View {
             // Question Card
             RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(Color.blue)
+                .shadow(color: .gray, radius: 3, x: 0, y: 5)
                 .padding(.horizontal)
                 .overlay(VStack{
                     ImageView(image: imageStore.image(url: quiz.attachment?.url))
@@ -46,14 +48,14 @@ struct QuizView: View {
                         }
                     }
                 })
-                .shadow(radius: 5)
             // Text field
             TextField("Type your answer", text: $answer)
-                .textFieldStyle(RoundedBorderTextFieldStyle()).padding(.all)
+                .foregroundColor(.gray)
+                .padding(.all)
             HStack {
                 // Check button
                 Button(action: {
-                    if(self.answer == self.quiz.answer){
+                    if(self.answer.lowercased() == self.quiz.answer){
                         self.alertText = "Correct!"
                     }else{
                         self.alertText = "Incorrect, try again"
@@ -63,10 +65,14 @@ struct QuizView: View {
                 }) {
                     RoundedRectangle(cornerRadius: 20)
                         .frame(height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .shadow(color: .gray, radius: 3, x: 0, y: 3)
                         .foregroundColor(.green)
                         .padding()
-                        .overlay(Text("Check!").font(.title2).foregroundColor(.white).bold())
-                        .shadow(radius: 5)
+                        .overlay(
+                            Text("Check!")
+                                .font(.title2)
+                                .foregroundColor(.white).bold())
+
                 }.alert(isPresented: $isCorrect, content: {
                     Alert(title: Text(alertText), dismissButton: .default(Text("Done")))
             })
@@ -76,9 +82,9 @@ struct QuizView: View {
                 }) {
                     RoundedRectangle(cornerRadius: 20).frame(height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .foregroundColor(.purple)
+                        .shadow(color: .gray, radius: 3, x: 0, y: 3)
                         .padding()
                         .overlay(Text("View answer").foregroundColor(.white).font(.title2).bold())
-                        .shadow(radius: 5)
                 }.alert(isPresented: $showCorrectAnswer, content: {
                     Alert(title: Text(self.quiz.answer), dismissButton: .default(Text("Done")))
                 })

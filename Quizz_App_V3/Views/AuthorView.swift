@@ -20,8 +20,8 @@ struct AuthorView: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 40, height: 40)
                 .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-                .overlay(Circle().stroke(Color.white, lineWidth: 3))
-                .shadow(radius: 2)
+                .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                .shadow(radius: 1.5)
             Text(quiz.author?.username ?? "Uknown author")
         }
     }

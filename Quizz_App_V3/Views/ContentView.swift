@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @EnvironmentObject var scoreModel: ScoreModel
     var model: QuizModel
     
     var body: some View {
