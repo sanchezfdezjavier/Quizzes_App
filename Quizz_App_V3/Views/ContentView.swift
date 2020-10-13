@@ -16,7 +16,7 @@ struct ContentView: View {
 
         NavigationView{
             List{
-                Text("Picker for favourites, persistent score")
+                Text("Picker for favourites")
                 ForEach(model.quizzes) { quiz in
                     NavigationLink(destination: QuizView(quiz: quiz)) {
                         QuizRowView(quiz: quiz)

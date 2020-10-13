@@ -13,12 +13,14 @@ struct Quizz_App_V3App: App {
     let model = QuizModel.shared
     let scoreModel = ScoreModel()
     let imageStore = ImageStore()
+    let favouritesModel = FavouritesModel()
     
     var body: some Scene {
         WindowGroup {
             ContentView(model: model)
                 .environmentObject(imageStore)
                 .environmentObject(scoreModel)
+                .environmentObject(favouritesModel)
         }
     }
 }

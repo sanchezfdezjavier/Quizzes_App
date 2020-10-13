@@ -10,6 +10,8 @@ import SwiftUI
 struct QuizView: View {
     
     var quiz: QuizItem
+    
+    @EnvironmentObject var favouritesModel: FavouritesModel
     @EnvironmentObject var imageStore: ImageStore
     @EnvironmentObject var scoreModel: ScoreModel
     
@@ -38,16 +40,30 @@ struct QuizView: View {
                             .padding(40)
                         // Favourite star button
                         Button(action: {
-                            // add to favourites code
+                            if(favouritesModel.favouriteIds.contains(quiz.id)){
+                                favouritesModel.removeFromFavourites(id: quiz.id)
+                            }else {
+                                favouritesModel.addToFavourites(id: quiz.id)
+                            }
                         }) {
-                            Image(systemName: "star")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                                .foregroundColor(.white)
-                                .padding(40)
+                            if(!favouritesModel.favouriteIds.contains(quiz.id)){
+                                Image(systemName: "star")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.white)
+                                    .padding(40)
+                            }else {
+                                Image(systemName: "star.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.yellow)
+                                    .shadow(color: .yellow, radius: 4)
+                                    .padding(40)
+                            }
                         }
                     }
                 })
+            Text(String(favouritesModel.favouriteIds.contains(quiz.id)))
             // Text field
             TextField("Type your answer", text: $answer)
                 .foregroundColor(.gray)

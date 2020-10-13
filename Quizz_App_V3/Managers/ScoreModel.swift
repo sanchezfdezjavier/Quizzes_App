@@ -24,5 +24,6 @@ class ScoreModel: ObservableObject {
         }
         return false
     }
+
 }
 
