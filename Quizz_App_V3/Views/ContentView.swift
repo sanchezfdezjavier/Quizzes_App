@@ -35,10 +35,15 @@ struct ContentView: View {
                     }
                 }
             }
-            .navigationBarItems(trailing: Toggle(isOn: $favouritesModel.showFavourites) {
+            .navigationBarItems(leading:
+                                    Image("Quizzes")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 150)
+                                    .padding(.all, 20)
+                                ,trailing: Toggle(isOn: $favouritesModel.showFavourites) {
                 Image(systemName: "star.fill").foregroundColor(.yellow)
             }.toggleStyle(SwitchToggleStyle(tint: .yellow)))
-            .navigationTitle("P1 Quiz app")
         }
         
     }
