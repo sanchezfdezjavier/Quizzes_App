@@ -17,30 +17,33 @@ struct ContentView: View {
     
     var body: some View {
         
-        NavigationView{
+        NavigationView {
             List{
                 ForEach(model.quizzes) { quiz in
                     // If toggle favourites is active
                     if(favouritesModel.showFavourites){
                         if(favouritesModel.favouriteIds.contains(quiz.id)){
-                            NavigationLink(destination: QuizView(quiz: quiz)) {
+                            NavigationLink(destination: QuizView(quiz: quiz, model: model)) {
                                 QuizRowView(quiz: quiz)
                             }
                         }
                         // If toggle favourites disabled
                     } else {
-                        NavigationLink(destination: QuizView(quiz: quiz)) {
+                        NavigationLink(destination: QuizView(quiz: quiz, model: model)) {
                             QuizRowView(quiz: quiz)
                         }
                     }
                 }
             }
             .navigationBarItems(leading:
-                                    Image("Quizzes")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 150)
-                                    .padding(.all, 20)
+                                    HStack{
+                                        ScoreView(model: model)
+                                        Image("Quizzes")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 150)
+                                        .padding(.all, 20)
+                                    }
                                 ,trailing: Toggle(isOn: $favouritesModel.showFavourites) {
                 Image(systemName: "star.fill").foregroundColor(.yellow)
             }.toggleStyle(SwitchToggleStyle(tint: .yellow)))

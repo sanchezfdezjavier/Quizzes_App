@@ -17,10 +17,9 @@ struct QuizRowView: View {
         HStack{
             Image(uiImage: imageStore.image(url: quiz.attachment?.url))
                 .resizable()
-                .scaledToFit()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 120, height: 120)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
-                .frame(width: 125)
-                .shadow(color: .gray, radius: 2, x: 0, y: 3)
             //Image(systemName: "checkmark.circle.fill").foregroundColor(.green)
             VStack(){
                 Text(quiz.question).bold()

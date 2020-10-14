@@ -31,7 +31,7 @@ struct QuizItem: Codable, Identifiable {
 }
 
 
-class QuizModel {
+class QuizModel: ObservableObject {
     
     // Singleton
     private(set) static var shared = QuizModel()

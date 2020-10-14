@@ -9,7 +9,10 @@ import SwiftUI
 
 struct QuizView: View {
     
+    @State private var color = [Color.orange, Color.red, Color.blue, Color.green, Color.pink][Int.random(in: 0...3)]
+    
     var quiz: QuizItem
+    var model: QuizModel
     
     @EnvironmentObject var favouritesModel: FavouritesModel
     @EnvironmentObject var imageStore: ImageStore
@@ -20,18 +23,21 @@ struct QuizView: View {
     @State private var isCorrect: Bool = false
     @State private var alertText: String = ""
     
+    
     var body: some View {
         
         VStack {
+            // Score view
+            ScoreView(model: model)
             // Question Card
             RoundedRectangle(cornerRadius: 20)
-                .foregroundColor(Color.blue)
+                .foregroundColor(color)
                 .shadow(color: .gray, radius: 3, x: 0, y: 5)
                 .padding(.horizontal)
                 .overlay(VStack{
                     ImageView(image: imageStore.image(url: quiz.attachment?.url))
                     Text(self.quiz.question)
-                        .font(.largeTitle)
+                        .font(.title)
                         .foregroundColor(.white)
                     // Author view
                     HStack{
@@ -112,6 +118,6 @@ struct QuizView: View {
 struct QuizView_Previews: PreviewProvider {
     
     static var previews: some View {
-        QuizView(quiz: QuizModel.shared.quizzes[0])
+        QuizView(quiz: QuizModel.shared.quizzes[0], model: QuizModel())
     }
 }
