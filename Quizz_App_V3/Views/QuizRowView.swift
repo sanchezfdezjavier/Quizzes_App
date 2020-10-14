@@ -18,7 +18,7 @@ struct QuizRowView: View {
             Image(uiImage: imageStore.image(url: quiz.attachment?.url))
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 120, height: 120)
+                .frame(width: 80, height: 80)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
             //Image(systemName: "checkmark.circle.fill").foregroundColor(.green)
             VStack(){

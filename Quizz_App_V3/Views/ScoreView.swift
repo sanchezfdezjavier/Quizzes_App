@@ -14,7 +14,7 @@ struct ScoreView: View {
     
     var body: some View {
         
-        Text("\(scoreModel.checkedIds.count) / \(model.quizzes.count)")
+        Text("Score: \(scoreModel.checkedIds.count) / \(model.quizzes.count)")
             .foregroundColor(.green)
     }
 }

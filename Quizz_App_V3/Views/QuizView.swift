@@ -34,7 +34,7 @@ struct QuizView: View {
                 .foregroundColor(color)
                 .shadow(color: .gray, radius: 3, x: 0, y: 5)
                 .padding(.horizontal)
-                .overlay(VStack{
+                .overlay(VStack {
                     ImageView(image: imageStore.image(url: quiz.attachment?.url))
                     Text(self.quiz.question)
                         .font(.title)

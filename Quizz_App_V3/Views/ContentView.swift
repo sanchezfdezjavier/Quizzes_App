@@ -35,18 +35,12 @@ struct ContentView: View {
                     }
                 }
             }
+            .navigationTitle("Quizzes")
             .navigationBarItems(leading:
-                                    HStack{
-                                        ScoreView(model: model)
-                                        Image("Quizzes")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 150)
-                                        .padding(.all, 20)
-                                    }
+                                    ScoreView(model: model)
                                 ,trailing: Toggle(isOn: $favouritesModel.showFavourites) {
-                Image(systemName: "star.fill").foregroundColor(.yellow)
-            }.toggleStyle(SwitchToggleStyle(tint: .yellow)))
+                                    Image(systemName: "star.fill").foregroundColor(.yellow)
+                                }.toggleStyle(SwitchToggleStyle(tint: .yellow)))
         }
         
     }
