@@ -26,24 +26,28 @@ struct QuizView: View {
     
     var body: some View {
         
+        
         VStack {
             // Score view
             ScoreView(model: model)
             // Question Card
             RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(color)
+                .frame(width: 350, height: 400)
                 .shadow(color: .gray, radius: 3, x: 0, y: 5)
                 .padding(.horizontal)
-                .overlay(VStack {
+                .overlay(
+                    VStack {
+                    Spacer(minLength: 20)
                     ImageView(image: imageStore.image(url: quiz.attachment?.url))
                     Text(self.quiz.question)
                         .font(.title)
                         .foregroundColor(.white)
-                    // Author view
+                        .padding()
                     HStack{
+                        // Author view
                         AuthorView(quiz: self.quiz)
                             .foregroundColor(.white)
-                            .padding(40)
                         // Favourite star button
                         Button(action: {
                             if(favouritesModel.favouriteIds.contains(quiz.id)){

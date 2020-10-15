@@ -14,13 +14,11 @@ struct ImageView: View {
     var body: some View {
         Image(uiImage: image)
             .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 300 ,alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.white, lineWidth: 10))
-            .cornerRadius(10)
-            .padding(5)
+            .aspectRatio(contentMode: .fill)
+            .frame(width: 300, height: 200)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.white, lineWidth: 5))
+            .shadow(radius: 6)
     }
 }
 

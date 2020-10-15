@@ -21,13 +21,14 @@ struct ContentView: View {
             List{
                 ForEach(model.quizzes) { quiz in
                     // If toggle favourites is active
-                    if(favouritesModel.showFavourites){
+                    if(favouritesModel.showFavourites) {
+                        // Is the quiz favourited?
                         if(favouritesModel.favouriteIds.contains(quiz.id)){
                             NavigationLink(destination: QuizView(quiz: quiz, model: model)) {
                                 QuizRowView(quiz: quiz)
                             }
                         }
-                        // If toggle favourites disabled
+                    // If toggle favourites disabled
                     } else {
                         NavigationLink(destination: QuizView(quiz: quiz, model: model)) {
                             QuizRowView(quiz: quiz)

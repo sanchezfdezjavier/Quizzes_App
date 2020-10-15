@@ -14,7 +14,7 @@ struct Quizz_App_V3App: App {
     let scoreModel = ScoreModel()
     let imageStore = ImageStore()
     let favouritesModel = FavouritesModel()
-    
+
     var body: some Scene {
         WindowGroup {
             ContentView(model: model, toggleShow: false)

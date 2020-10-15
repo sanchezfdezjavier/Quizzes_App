@@ -9,17 +9,17 @@ import Foundation
 
 class ScoreModel: ObservableObject {
     
-    //@Published var score: Int
+    // Successful quizzes answered
     @Published var checkedIds: Set<Int> = []
     
     func checkAnswer(answer: String, quiz: QuizItem) -> Bool {
-        let answ1 = answer.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
-        let answ2 = quiz.answer.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        let userInput = answer.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        let quizAnswer = quiz.answer.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         
-        if (answ1 == answ2) && (!checkedIds.contains(quiz.id)) {
+        if ((userInput == quizAnswer) && (!checkedIds.contains(quiz.id))) {
             checkedIds.insert(quiz.id)
             return true
-        } else if (answ1 == answ2) && (checkedIds.contains(quiz.id)){
+        } else if (userInput == quizAnswer) && (checkedIds.contains(quiz.id)){
             return true
         }
         return false
