@@ -10,12 +10,14 @@ import SwiftUI
 struct ImageView: View {
     
     let image : UIImage
+    let width: CGFloat
+    let heigth: CGFloat
     
     var body: some View {
         Image(uiImage: image)
             .resizable()
             .aspectRatio(contentMode: .fill)
-            .frame(width: 300, height: 200)
+            .frame(width: self.width, height: self.heigth)
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.white, lineWidth: 5))
             .shadow(radius: 6)
@@ -27,6 +29,6 @@ struct ImageView_Previews: PreviewProvider {
     static var imageStore: ImageStore = ImageStore()
     
     static var previews: some View {
-        ImageView(image: imageStore.defaultImage)
+        ImageView(image: imageStore.defaultImage, width: 400, heigth: 400)
     }
 }
