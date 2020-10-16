@@ -15,11 +15,14 @@ struct ContentView: View {
     @EnvironmentObject var favouritesModel: FavouritesModel
     @State var toggleShow: Bool
     
+    // Handle device orientation
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    
     var body: some View {
         
         NavigationView {
             List{
-                ForEach(model.quizzes) { quiz in
+                ForEach(model.quizzes, id: \.id) { quiz in
                     // If toggle favourites is active
                     if(favouritesModel.showFavourites) {
                         // Is the quiz favourited?
@@ -42,6 +45,13 @@ struct ContentView: View {
                                 ,trailing: Toggle(isOn: $favouritesModel.showFavourites) {
                                     Image(systemName: "star.fill").foregroundColor(.yellow)
                                 }.toggleStyle(SwitchToggleStyle(tint: .yellow)))
+        }
+        if horizontalSizeClass != .compact {
+            HStack{
+                Image(systemName: "arrow.right").foregroundColor(Color.gray)
+                Text("Swipe to reveal the quizzes!")
+                    .foregroundColor(Color.gray)
+            }
         }
         
     }

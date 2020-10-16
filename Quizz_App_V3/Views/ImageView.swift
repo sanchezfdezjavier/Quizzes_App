@@ -19,8 +19,7 @@ struct ImageView: View {
             .aspectRatio(contentMode: .fill)
             .frame(width: self.width, height: self.heigth)
             .clipShape(RoundedRectangle(cornerRadius: 20))
-            .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.white, lineWidth: 5))
-            .shadow(radius: 6)
+            .overlay(RoundedRectangle(cornerRadius: 20).strokeBorder(Color.white, lineWidth: 5))
     }
 }
 
