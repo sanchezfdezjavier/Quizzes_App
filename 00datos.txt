@@ -1,0 +1,13 @@
+Javier Sánchez Fernández
+Fernando Pareja Mayo
+
+u041 = d13672e3
+
+Mejoras realizas:
+1. Varias Imágenes
+2. Ver respuesta correcta
+3. (Extra) Filtrar favoritos en local
+4. (Extra) Puntuación pseudopersistente, se borra cada vez que cierras la app.
+
+
+

@@ -14,8 +14,11 @@ struct ScoreView: View {
     
     var body: some View {
         
-        Text("Score: \(scoreModel.checkedIds.count) / \(model.quizzes.count)")
-            .foregroundColor(.green)
+        HStack{
+            Image(systemName: "checkmark.circle.fill").foregroundColor(.green)
+            Text("\(scoreModel.checkedIds.count) / \(model.quizzes.count)").bold()
+                .foregroundColor(.green)
+        }
     }
 }
 

@@ -20,9 +20,10 @@ struct QuizRowView: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 80, height: 80)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
+                .shadow(color: Color.black.opacity(0.4), radius: 1, y:2)
             //Image(systemName: "checkmark.circle.fill").foregroundColor(.green)
-            VStack(){
-                Text(quiz.question).bold()
+            VStack(alignment: .leading){
+                Text(quiz.question)
                 HStack{
                     AuthorView(imageStore: _imageStore, quiz: quiz)
                     //Favourites placeholder

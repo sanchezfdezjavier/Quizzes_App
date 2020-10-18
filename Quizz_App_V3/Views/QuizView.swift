@@ -53,7 +53,9 @@ var portraitView: some View {
             RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(color)
                 .frame(width: 360, height: 450)
-                .shadow(color: .gray, radius: 2, x: 0, y: 5)
+                .shadow(
+                    color: Color.black.opacity(0.4),
+                    radius: 2, x: 0, y: 5)
                 .padding(.horizontal)
             VStack(alignment: .center){
                 ImageView(image: imageStore.image(url: quiz.attachment?.url), width: 300, heigth: 200)
@@ -115,7 +117,9 @@ var portraitView: some View {
             }) {
                 RoundedRectangle(cornerRadius: 20)
                     .frame(height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .shadow(color: .gray, radius: 2, x: 0, y: 5)
+                    .shadow(color:
+                                Color.black.opacity(0.4),
+                            radius: 2, x: 0, y: 5)
                     .foregroundColor(.green)
                     .padding()
                     .overlay(
@@ -132,7 +136,9 @@ var portraitView: some View {
             }) {
                 RoundedRectangle(cornerRadius: 20).frame(height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .foregroundColor(.purple)
-                    .shadow(color: .gray, radius: 2, x: 0, y: 5)
+                    .shadow(
+                        color: Color.black.opacity(0.4),
+                        radius: 2, x: 0, y: 5)
                     .padding()
                     .overlay(Text("View answer").foregroundColor(.white).font(.title2).bold())
             }.alert(isPresented: $showCorrectAnswer, content: {
@@ -149,7 +155,7 @@ var landscapeView: some View {
         RoundedRectangle(cornerRadius: 20)
             .foregroundColor(color)
             .frame(width: 380, height: 300)
-            .shadow(color: .gray, radius: 2, x: 0, y: 5)
+            .shadow(color: Color.black.opacity(0.4), radius: 2, x: 0, y: 5)
             .padding(.horizontal)
             .overlay(
                 VStack {
@@ -210,7 +216,7 @@ var landscapeView: some View {
             }) {
                 RoundedRectangle(cornerRadius: 20)
                     .frame(height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .shadow(color: .gray, radius: 2, x: 0, y: 5)
+                    .shadow(color: Color.black.opacity(0.4), radius: 2, x: 0, y: 5)
                     .foregroundColor(.green)
                     .padding(1)
                     .overlay(
@@ -227,7 +233,7 @@ var landscapeView: some View {
             }) {
                 RoundedRectangle(cornerRadius: 20).frame(height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .foregroundColor(.purple)
-                    .shadow(color: .gray, radius: 2, x: 0, y: 5)
+                    .shadow(color: Color.black.opacity(0.4), radius: 2, x: 0, y: 5)
                     .padding(1)
                     .overlay(Text("View answer").foregroundColor(.white).font(.title2).bold())
             }.alert(isPresented: $showCorrectAnswer, content: {

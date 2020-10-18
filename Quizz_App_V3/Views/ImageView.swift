@@ -28,6 +28,6 @@ struct ImageView_Previews: PreviewProvider {
     static var imageStore: ImageStore = ImageStore()
     
     static var previews: some View {
-        ImageView(image: imageStore.defaultImage, width: 400, heigth: 400)
+        ImageView(image: imageStore.errorDownloading, width: 400, heigth: 400)
     }
 }
