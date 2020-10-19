@@ -30,6 +30,7 @@ struct ContentView: View {
                             NavigationLink(destination: QuizView(quiz: quiz, model: model)) {
                                 QuizRowView(quiz: quiz)
                             }
+                            
                         }
                         // If toggle favourites disabled
                     } else {
@@ -39,7 +40,6 @@ struct ContentView: View {
                     }
                 }
             }
-            
             .navigationTitle("Quizzes")
             .navigationBarItems(leading:
                                     ScoreView(model: model)
