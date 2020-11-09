@@ -38,15 +38,17 @@ class ImageStore: ObservableObject {
             if let data = try? Data(contentsOf: url),
                let img = UIImage(data: data) {
                 
-                print(url)
-                
                 DispatchQueue.main.async {
                     self.imagesCache[url] = img
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.imagesCache[url] = self.errorDownloading
                 }
             }
         }
         // Showed image when downloading error
-        return errorDownloading
+        return loadingImage
     }
 }
 
