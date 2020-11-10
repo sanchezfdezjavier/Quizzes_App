@@ -12,18 +12,35 @@ class ScoreModel: ObservableObject {
     // Successful quizzes answered
     @Published var checkedIds: Set<Int> = []
     
+    init(){
+        // Singleton stored by the system
+        let us = UserDefaults.standard
+        
+        if let checkedIds = us.object(forKey: "checkedIds") as? [Int] {
+            self.checkedIds = Set(checkedIds)
+        }
+    }
+    
     func checkAnswer(answer: String, quiz: QuizItem) -> Bool {
         let userInput = answer.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         let quizAnswer = quiz.answer.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         
-        if ((userInput == quizAnswer) && (!checkedIds.contains(quiz.id))) {
+        if userInput == quizAnswer, !checkedIds.contains(quiz.id){
             checkedIds.insert(quiz.id)
-            return true
-        } else if (userInput == quizAnswer) && (checkedIds.contains(quiz.id)){
+            let us = UserDefaults.standard
+            
+            // we can not store sets in UserDefaults
+            us.set(Array<Int>(checkedIds), forKey: "checkedIds")
             return true
         }
         return false
     }
-
+    
+    func acertado(_ quiz: QuizItem) -> Bool {
+        //print
+        return true
+    }
 }
+
+
 

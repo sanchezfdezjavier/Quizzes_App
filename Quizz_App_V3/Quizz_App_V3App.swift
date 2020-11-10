@@ -10,14 +10,19 @@ import SwiftUI
 @main
 struct Quizz_App_V3App: App {
     
-    let model = QuizModel.shared
+    let quizModel: QuizModel = {
+        let qm = QuizModel()
+        qm.load()
+        return qm
+    }()
     let scoreModel = ScoreModel()
     let imageStore = ImageStore()
     let favouritesModel = FavouritesModel()
 
     var body: some Scene {
         WindowGroup {
-            ContentView(model: model, toggleShow: false)
+            ContentView(toggleShow: false)
+                .environmentObject(quizModel)
                 .environmentObject(imageStore)
                 .environmentObject(scoreModel)
                 .environmentObject(favouritesModel)

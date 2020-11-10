@@ -27,9 +27,17 @@ struct AuthorView: View {
     }
 }
 
+#if DEBUG
 struct AuthorView_Previews: PreviewProvider {
+    
+    static let quizModel: QuizModel = {
+       let qm = QuizModel()
+        qm.loadExamples()
+        return qm
+    }()
+    
     static var previews: some View {
-        let model = QuizModel.shared
-        AuthorView(quiz: model.quizzes[0])
+        AuthorView(quiz: quizModel.quizzes[0])
     }
 }
+#endif
