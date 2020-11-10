@@ -34,8 +34,17 @@ struct QuizRowView: View {
     }
 }
 
+#if DEBUG
 struct QuizRowView_Previews: PreviewProvider {
+    
+    static let quizModel: QuizModel = {
+       let qm = QuizModel()
+        qm.loadExamples()
+        return qm
+    }()
+    
     static var previews: some View {
-        QuizRowView(quiz: QuizModel.shared.quizzes[0])
+        QuizRowView(quiz: quizModel.quizzes[0])
     }
 }
+#endif

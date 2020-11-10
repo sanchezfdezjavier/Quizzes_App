@@ -15,11 +15,12 @@ struct QuizItem: Codable, Identifiable {
     let answer: String
     let author: Author?
     let attachment: Attachment?
-    let favourite: Bool
+    var favourite: Bool
     
     struct Author: Codable {
         let isAdmin: Bool?
-        let username: String
+        let username: String?
+        let profileName: String?
         let photo: Attachment?
     }
     
@@ -33,42 +34,84 @@ struct QuizItem: Codable, Identifiable {
 
 class QuizModel: ObservableObject {
     
-    // Singleton
-    private(set) static var shared = QuizModel()
+    @Published private(set) var quizzes = [QuizItem]()
+    let session = URLSession.shared
+    let urlBase = "https://core.dit.upm.es"
+    let TOKEN: String = "79883822125bf8227713"
     
-    private(set) var quizzes = [QuizItem]()
-    
-    init() {
-       load()
-    }
-    
-    private func load() {
+    func load() {
         
-        // Bundle.main --> are all the files inside our proyect
-        //
-        guard let jsonURL = Bundle.main.url(forResource: "p1_quizzes", withExtension: "json") else {
-            print("Internal error: No encuentro p1_quizzes.json")
+        let s = "\(urlBase)/api/quizzes/random10wa?token=\(TOKEN)"
+        
+        guard let url = URL(string: s) else {
+            print("An error has ocurred creating URL")
             return
         }
         
-        do {
-            let data = try Data(contentsOf: jsonURL)
+        // HTTP request
+        let t = session.dataTask(with: url) { (data, res, error) in
+            if error != nil {
+                print("Request failed")
+                return
+            }
+            if (res as! HTTPURLResponse).statusCode != 200 {
+                print("Request successful")
+                return
+            }
+            
             let decoder = JSONDecoder()
             
-            // let str = String(data: data, encoding: String.Encoding.utf8)
-            // print("Quizzes ==>", str!)
-            
-            let quizzes = try decoder.decode([QuizItem].self, from: data)
-            
-            // print("Quizzes cargados")
-            
-            self.quizzes = quizzes
-        } catch {
-            print("Algo chungo ha pasado: \(error)")
+            if let quizzes = try? decoder.decode([QuizItem].self, from: data!){
+                
+                // print("Quizzes cargados")
+                DispatchQueue.main.async {
+                    self.quizzes = quizzes
+                }
+            }
         }
+        t.resume()
     }
     
+    func toggleFavourite(_ quizItem: QuizItem){
+        guard let index = quizzes.firstIndex(where: {$0.id == quizItem.id}) else {
+                print("Error toggleFavourite")
+                return
+        }
+        
+        let surl = "\(urlBase)/api/users/tokenOwner/favourites/\(quizItem.id)?token=\(TOKEN)"
+        
+        guard let url = URL(string: surl) else {
+            print("Error toggleFavourite2")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = quizItem.favourite ? "DELETE" : "PUT"
+        request.addValue("XMLHttpRequest", forHTTPHeaderField: "X-Requested-With")
+        
+        let t = session.uploadTask(with: request, from: Data()) { (data, res, error) in
+            if error != nil {
+                print("Fallo 20", error)
+                return
+            }
+            
+            if (res as! HTTPURLResponse).statusCode != 200 {
+                print("Fallo 30")
+                return
+            }
+            
+            DispatchQueue.main.async{
+                self.quizzes[index].favourite.toggle()
+            }
+        }
+        
+        t.resume()
+    }
     
+    //completar
+    func loadExamples(){
+        //code
+    }
 }
 
 #if DEBUG

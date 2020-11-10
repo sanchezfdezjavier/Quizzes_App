@@ -9,8 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    var model: QuizModel
-    
+    @EnvironmentObject var quizModel: QuizModel
     @EnvironmentObject var scoreModel: ScoreModel
     @EnvironmentObject var favouritesModel: FavouritesModel
     @State var toggleShow: Bool
@@ -22,27 +21,16 @@ struct ContentView: View {
         
         NavigationView {
             List{
-                ForEach(model.quizzes, id: \.id) { quiz in
-                    // If toggle favourites is active
-                    if(favouritesModel.showFavourites) {
-                        // Is the quiz favourited?
-                        if(favouritesModel.favouriteIds.contains(quiz.id)){
-                            NavigationLink(destination: QuizView(quiz: quiz, model: model)) {
-                                QuizRowView(quiz: quiz)
-                            }
-                            
-                        }
-                        // If toggle favourites disabled
-                    } else {
-                        NavigationLink(destination: QuizView(quiz: quiz, model: model)) {
-                            QuizRowView(quiz: quiz)
-                        }
+                ForEach(quizModel.quizzes, id: \.id) { quiz in
+                    NavigationLink(destination: QuizView(quiz: quiz)) {
+                        QuizRowView(quiz: quiz)
                     }
+                    
                 }
             }
             .navigationTitle("Quizzes")
             .navigationBarItems(leading:
-                                    ScoreView(model: model)
+                                    ScoreView()
                                 ,trailing: Toggle(isOn: $favouritesModel.showFavourites) {
                                     Image(systemName: "star.fill").foregroundColor(.yellow)
                                 }.toggleStyle(SwitchToggleStyle(tint: .yellow)))
@@ -60,8 +48,14 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     
+    static let quizModel: QuizModel = {
+       let qm = QuizModel()
+        qm.loadExamples()
+        return qm
+    }()
+    
     static var previews: some View {
-        let model = QuizModel.shared
-        ContentView(model: model, toggleShow: false)
+        ContentView(toggleShow: false)
+            .environmentObject(quizModel)
     }
 }

@@ -13,9 +13,9 @@ struct QuizView: View {
     @State private var color = [Color.orange, Color.red, Color.blue, Color.green, Color.pink][Int.random(in: 0...3)]
     
     var quiz: QuizItem
-    var model: QuizModel
     
     // Global properties
+    @EnvironmentObject var quizModel: QuizModel
     @EnvironmentObject var favouritesModel: FavouritesModel
     @EnvironmentObject var imageStore: ImageStore
     @EnvironmentObject var scoreModel: ScoreModel
@@ -46,7 +46,7 @@ struct QuizView: View {
         // Portrait view
         VStack {
             // Score view
-            ScoreView(model: model).font(.system(size: 20))
+            ScoreView().font(.system(size: 20))
             // Question Card
             
             ZStack{
@@ -202,7 +202,7 @@ struct QuizView: View {
                     AuthorView(quiz: self.quiz)
                     Spacer()
                     // Score view
-                    ScoreView(model: model).font(.system(size: 20))
+                    ScoreView().font(.system(size: 20))
                 }
                 // Check button
                 Button(action: {
@@ -249,9 +249,17 @@ struct QuizView: View {
     }
 }
 
+#if DEBUG
 struct QuizView_Previews: PreviewProvider {
     
+    static let quizModel: QuizModel = {
+       let qm = QuizModel()
+        qm.loadExamples()
+        return qm
+    }()
+    
     static var previews: some View {
-        QuizView(quiz: QuizModel.shared.quizzes[0], model: QuizModel())
+        QuizView(quiz: quizModel.quizzes[0])
     }
 }
+#endif
