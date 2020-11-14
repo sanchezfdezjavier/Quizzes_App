@@ -91,7 +91,7 @@ class QuizModel: ObservableObject {
         
         let t = session.uploadTask(with: request, from: Data()) { (data, res, error) in
             if error != nil {
-                print("Fallo 20", error)
+                print("Fallo 20", error!)
                 return
             }
             
