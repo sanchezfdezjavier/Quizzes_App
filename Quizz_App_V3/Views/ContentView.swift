@@ -11,7 +11,6 @@ struct ContentView: View {
     
     @EnvironmentObject var quizModel: QuizModel
     @EnvironmentObject var scoreModel: ScoreModel
-    @EnvironmentObject var favouritesModel: FavouritesModel
     @State var toggleChecked: Bool = false
     
     // Handle device orientation
@@ -22,17 +21,29 @@ struct ContentView: View {
         NavigationView {
             List{
                 ForEach(quizModel.quizzes, id: \.id) { quiz in
-                    NavigationLink(destination: QuizView(quiz: quiz)) {
-                        QuizRowView(quiz: quiz)
+                    // Only show unanswered quizzes
+                    if(!toggleChecked == !scoreModel.checkedIds.contains(quiz.id)){
+                        NavigationLink(destination: QuizView(quiz: quiz)) {
+                            QuizRowView(quiz: quiz)
+                        }
                     }
                 }
             }
             .navigationTitle("Quizzes")
             .navigationBarItems(leading:
                                     ScoreView()
-                                ,trailing: Toggle(isOn: $favouritesModel.showFavourites) {
-                                    Image(systemName: "star.fill").foregroundColor(.yellow)
-                                }.toggleStyle(SwitchToggleStyle(tint: .yellow)))
+                                ,trailing: HStack{
+                                    Toggle(isOn: $toggleChecked){
+                                        Image(systemName: "eye.slash").foregroundColor(.green)
+                                    }
+                                    Divider()
+                                    Button(action:{
+                                        //action code
+                                        quizModel.load()
+                                    }){
+                                        Image(systemName: "arrow.clockwise")
+                                    }
+                                })
         }
         if horizontalSizeClass != .compact {
             HStack{

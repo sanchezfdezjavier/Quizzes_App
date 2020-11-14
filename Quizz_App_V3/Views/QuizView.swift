@@ -72,33 +72,11 @@ struct QuizView: View {
                         AuthorView(quiz: self.quiz)
                             .foregroundColor(.white)
                         // Favourite star button
-                        Button(action: {
-                            if(favouritesModel.favouriteIds.contains(quiz.id)){
-                                favouritesModel.removeFromFavourites(id: quiz.id)
-                            }else {
-                                favouritesModel.addToFavourites(id: quiz.id)
-                            }
-                        }) {
-                            if(!favouritesModel.favouriteIds.contains(quiz.id)){
-                                Image(systemName: "star")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(.white)
-                                    .padding(40)
-                            }else {
-                                Image(systemName: "star.fill")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(.yellow)
-                                    .shadow(color: .yellow, radius: 2)
-                                    .padding(40)
-                            }
-                        }
+                        FavouriteButtonView(quiz: quiz)
                     }
                 }
             }
-            
-            
+
             // Text field
             TextField("Type your answer", text: $answer)
                 .foregroundColor(.gray)
@@ -172,28 +150,7 @@ struct QuizView: View {
                                 .foregroundColor(.white)
                                 .padding()
                             // Favourite star button
-                            Button(action: {
-                                if(favouritesModel.favouriteIds.contains(quiz.id)){
-                                    favouritesModel.removeFromFavourites(id: quiz.id)
-                                }else {
-                                    favouritesModel.addToFavourites(id: quiz.id)
-                                }
-                            }) {
-                                if(!favouritesModel.favouriteIds.contains(quiz.id)){
-                                    Image(systemName: "star")
-                                        .resizable()
-                                        .frame(width: 30, height: 30)
-                                        .foregroundColor(.white)
-                                        .padding(40)
-                                }else {
-                                    Image(systemName: "star.fill")
-                                        .resizable()
-                                        .frame(width: 30, height: 30)
-                                        .foregroundColor(.yellow)
-                                        .shadow(color: .yellow, radius: 2)
-                                        .padding(40)
-                                }
-                            }
+                            FavouriteButtonView(quiz: quiz)
                         }
                     })
             VStack {
@@ -253,7 +210,7 @@ struct QuizView: View {
 struct QuizView_Previews: PreviewProvider {
     
     static let quizModel: QuizModel = {
-       let qm = QuizModel()
+        let qm = QuizModel()
         qm.loadExamples()
         return qm
     }()

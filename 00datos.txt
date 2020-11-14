@@ -4,10 +4,11 @@ Fernando Pareja Mayo
 u041 = d13672e3
 
 Mejoras realizas:
-1. Varias Imágenes
+1. Varias imagenes(CORREGIDA)
 2. Ver respuesta correcta
-3. (Extra) Filtrar favoritos en local
-4. (Extra) Puntuación pseudopersistente, se borra cada vez que cierras la app.
+3. Filtrar acertados
+4. Puntuacion Persistente
+5. Actualizar Favoritos
 
 
 
