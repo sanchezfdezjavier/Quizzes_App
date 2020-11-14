@@ -12,7 +12,7 @@ struct ContentView: View {
     @EnvironmentObject var quizModel: QuizModel
     @EnvironmentObject var scoreModel: ScoreModel
     @EnvironmentObject var favouritesModel: FavouritesModel
-    @State var toggleShow: Bool
+    @State var toggleChecked: Bool = false
     
     // Handle device orientation
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -25,15 +25,14 @@ struct ContentView: View {
                     NavigationLink(destination: QuizView(quiz: quiz)) {
                         QuizRowView(quiz: quiz)
                     }
-                    
                 }
             }
             .navigationTitle("Quizzes")
-//            .navigationBarItems(leading:
-//                                    ScoreView()
-//                                ,trailing: Toggle(isOn: $favouritesModel.showFavourites) {
-//                                    Image(systemName: "star.fill").foregroundColor(.yellow)
-//                                }.toggleStyle(SwitchToggleStyle(tint: .yellow)))
+            .navigationBarItems(leading:
+                                    ScoreView()
+                                ,trailing: Toggle(isOn: $favouritesModel.showFavourites) {
+                                    Image(systemName: "star.fill").foregroundColor(.yellow)
+                                }.toggleStyle(SwitchToggleStyle(tint: .yellow)))
         }
         if horizontalSizeClass != .compact {
             HStack{
@@ -46,10 +45,7 @@ struct ContentView: View {
     }
 }
 
-//                                ,trailing: Toggle(isOn: $favouritesModel.showFavourites) {
-//                                    Image(systemName: "star.fill").foregroundColor(.yellow)
-//                                }.toggleStyle(SwitchToggleStyle(tint: .yellow)))
-
+#if DEBUG
 struct ContentView_Previews: PreviewProvider {
     
     static let quizModel: QuizModel = {
@@ -59,7 +55,8 @@ struct ContentView_Previews: PreviewProvider {
     }()
     
     static var previews: some View {
-        ContentView(toggleShow: false)
+        ContentView()
             .environmentObject(quizModel)
     }
 }
+#endif

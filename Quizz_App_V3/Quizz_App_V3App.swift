@@ -21,7 +21,7 @@ struct Quizz_App_V3App: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView(toggleShow: false)
+            ContentView()
                 .environmentObject(quizModel)
                 .environmentObject(imageStore)
                 .environmentObject(scoreModel)

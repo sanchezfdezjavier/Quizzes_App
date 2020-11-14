@@ -25,8 +25,8 @@ struct QuizItem: Codable, Identifiable {
     }
     
     struct Attachment: Codable {
-        let filename: String
-        let mime: String
+        let filename: String?
+        let mime: String?
         let url: URL?
     }
 }
