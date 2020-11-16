@@ -23,7 +23,7 @@ struct ContentView: View {
                 ForEach(quizModel.quizzes, id: \.id) { quiz in
                     // Only show unanswered quizzes
                     if(toggleChecked){
-                        if(scoreModel.checkedIds.contains(quiz.id)){
+                        if(!scoreModel.checkedIds.contains(quiz.id)){
                             NavigationLink(destination: QuizView(quiz: quiz)) {
                                 QuizRowView(quiz: quiz)
                             }

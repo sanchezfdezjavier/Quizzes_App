@@ -16,7 +16,7 @@ struct ScoreView: View {
         
         HStack{
             Image(systemName: "checkmark.circle.fill").foregroundColor(.green)
-            Text("\(scoreModel.checkedIds.count) / \(quizModel.quizzes.count)").bold()
+            Text("\(scoreModel.checkedIds.count)").bold()
                 .foregroundColor(.green)
         }
     }
