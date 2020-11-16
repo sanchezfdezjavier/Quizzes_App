@@ -22,7 +22,13 @@ struct ContentView: View {
             List{
                 ForEach(quizModel.quizzes, id: \.id) { quiz in
                     // Only show unanswered quizzes
-                    if(!toggleChecked == !scoreModel.checkedIds.contains(quiz.id)){
+                    if(toggleChecked){
+                        if(scoreModel.checkedIds.contains(quiz.id)){
+                            NavigationLink(destination: QuizView(quiz: quiz)) {
+                                QuizRowView(quiz: quiz)
+                            }
+                        }
+                    } else {
                         NavigationLink(destination: QuizView(quiz: quiz)) {
                             QuizRowView(quiz: quiz)
                         }
@@ -34,8 +40,9 @@ struct ContentView: View {
                                     ScoreView()
                                 ,trailing: HStack{
                                     Toggle(isOn: $toggleChecked){
-                                        Image(systemName: "eye.slash").foregroundColor(.green)
-                                    }
+                                        Image(systemName: "eye.slash").foregroundColor(.red)
+                                        Image(systemName: "checkmark.circle.fill").foregroundColor(.green)
+                                    }.toggleStyle(SwitchToggleStyle(tint: .red))
                                     Divider()
                                     Button(action:{
                                         //action code
